@@ -6,11 +6,14 @@ import com.inditex.pricing.domain.port.in.GetApplicablePriceUseCase;
 import com.inditex.pricing.domain.port.in.LookupPriceQuery;
 import com.inditex.pricing.infrastructure.observability.PricingMetrics;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
+@Validated
 @RestController
 @RequestMapping("/api/prices")
 public class PriceController {
@@ -26,9 +29,9 @@ public class PriceController {
     @Operation(summary = "Get applicable price for a product and brand at a given date")
     @GetMapping
     public PriceResponse getPrice(
-            @RequestParam Long brandId,
-            @RequestParam Long productId,
-            @RequestParam
+            @RequestParam @NotNull Long brandId,
+            @RequestParam @NotNull Long productId,
+            @RequestParam @NotNull
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
             LocalDateTime applicationDate
     ) {
