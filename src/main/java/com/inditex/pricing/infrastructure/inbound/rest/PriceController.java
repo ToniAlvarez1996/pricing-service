@@ -5,6 +5,7 @@ import com.inditex.pricing.domain.model.Price;
 import com.inditex.pricing.domain.port.in.GetApplicablePriceUseCase;
 import com.inditex.pricing.domain.port.in.LookupPriceQuery;
 import com.inditex.pricing.infrastructure.observability.PricingMetrics;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ public class PriceController {
         this.metrics = metrics;
     }
 
+    @Operation(summary = "Get applicable price for a product and brand at a given date")
     @GetMapping
     public PriceResponse getPrice(
             @RequestParam Long brandId,
